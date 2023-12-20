@@ -1,5 +1,6 @@
 package manager;
 
+import models.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,6 +31,21 @@ public class HelperUser extends HelperBase{
         //passwordInput.sendKeys(password);
 
         type(By.xpath("//input[last()]"), password);
+    }
+    public void fillLoginRegistrationForm(User user){
+        //WebElement emailInput = driver.findElement(By.name("email"));
+        //emailInput.click();
+        //emailInput.clear();
+        //emailInput.sendKeys(email);
+
+        type(By.name("email"), user.getEmail());
+
+        //WebElement passwordInput = driver.findElement(By.xpath("//input[last()]"));
+        //passwordInput.click();
+        //passwordInput.clear();
+        //passwordInput.sendKeys(password);
+
+        type(By.xpath("//input[last()]"), user.getPassword());
     }
         public void submitLogin(){
             click(By.xpath("//button[text()='Login']"));
