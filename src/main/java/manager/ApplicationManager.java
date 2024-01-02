@@ -11,6 +11,7 @@ public class ApplicationManager {
     WebDriver driver;
 
     HelperUser helperUser;
+    HelperContact helperContact;
 
 
     public void init(){
@@ -19,11 +20,16 @@ public class ApplicationManager {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.navigate().to("https://telranedu.web.app/");
         helperUser = new HelperUser(driver);
+        helperContact = new HelperContact(driver);
 
     }
 
     public HelperUser getHelperUser() {
         return helperUser;
+    }
+
+    public HelperContact getHelperContact() {
+        return helperContact;
     }
 
     public void stop(){

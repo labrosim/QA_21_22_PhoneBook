@@ -18,28 +18,29 @@ public class HelperBase {
         this.driver = driver;
     }
 
-    public void type(By locator, String text){
+    public void type(By locator, String text) {
         WebElement element = driver.findElement(locator);
         element.click();
         element.clear();
-        if(text != null){
+        if (text != null) {
             element.sendKeys(text);
         }
     }
 
-    public void click(By locator){
+    public void click(By locator) {
         WebElement element = driver.findElement(locator);
         element.click();
     }
 
-    public boolean isElementPresent(By locator){
+    public boolean isElementPresent(By locator) {
         List<WebElement> list = driver.findElements(locator);
         return list.size() > 0;
     }
 
     public boolean isAlertPresents(String message) {
         Alert alert = new WebDriverWait(driver, 10).until(ExpectedConditions.alertIsPresent());
-        if(alert != null && alert.getText().contains(message)){
+        System.out.println(alert.getText());
+        if (alert != null && alert.getText().contains(message)) {
             //click OK
             alert.accept();
             //click cancel --> alert.dismiss();
@@ -48,4 +49,5 @@ public class HelperBase {
         }
         return false;
     }
+
 }
