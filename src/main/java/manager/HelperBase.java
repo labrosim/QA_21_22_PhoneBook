@@ -1,9 +1,6 @@
 package manager;
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,14 +15,7 @@ public class HelperBase {
         this.driver = driver;
     }
 
-    public void type(By locator, String text) {
-        WebElement element = driver.findElement(locator);
-        element.click();
-        element.clear();
-        if (text != null) {
-            element.sendKeys(text);
-        }
-    }
+
 
     public void click(By locator) {
         WebElement element = driver.findElement(locator);
@@ -49,5 +39,30 @@ public class HelperBase {
         }
         return false;
     }
+    public void pause(int time) {
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void type(By locator, String text) {
+        WebElement element = driver.findElement(locator);
+        element.click();
+        element.clear();
+        clearNew(element);
+        if (text != null) {
+            System.out.println("hello");
+            element.sendKeys(text);
+        }
 
+
+    }
+
+
+    public void clearNew(WebElement element) {
+        element.sendKeys(" ");
+        element.sendKeys(Keys.BACK_SPACE);
+
+    }
 }
