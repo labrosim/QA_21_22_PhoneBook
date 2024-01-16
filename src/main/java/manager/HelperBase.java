@@ -4,12 +4,16 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class HelperBase {
 
     WebDriver driver;
+    Logger logger = LoggerFactory.getLogger(HelperBase.class);
 
     public HelperBase(WebDriver driver) {
         this.driver = driver;
@@ -65,4 +69,11 @@ public class HelperBase {
         element.sendKeys(Keys.BACK_SPACE);
 
     }
+
+    public String getMessage() {
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector(".contact-page_message__2qafk>h1"))));
+        return  driver.findElement(By.cssSelector(".contact-page_message__2qafk>h1")).getText();
+    }
+
 }
