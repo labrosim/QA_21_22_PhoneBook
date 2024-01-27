@@ -1,5 +1,6 @@
 package tests;
 
+import manager.DataProviderContact;
 import models.Contacts;
 import models.User;
 import org.openqa.selenium.WebElement;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class AddNewContactsTests extends TestBase {
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void preCondition() {
         if (!app.getHelperUser().isLogged()) {
             app.getHelperUser().login(new User().setEmail("qwe@d.com").setPassword("Ff12345$"));
@@ -19,17 +20,17 @@ public class AddNewContactsTests extends TestBase {
         }
     }
 
-    @Test
-    public void addNewContactSuccessAll() throws InterruptedException {
+    @Test(dataProvider = "contactSuccess", dataProviderClass = DataProviderContact.class)
+    public void addNewContactSuccessAll(Contacts contacts) throws InterruptedException {
         int i = (int) (System.currentTimeMillis() / 1000 % 3600);
-        Contacts contacts = Contacts.builder()
-                .name("Emma"+i)
-                .lastName("Cold")
-                .phone("1236583" + i)
-                .email("ghj@yug.io")
-                .address("Argentina")
-                .description("all fields")
-                .build();
+//        Contacts contacts = Contacts.builder()
+//                .name("Emma"+i)
+//                .lastName("Cold")
+//                .phone("1236583" + i)
+//                .email("ghj@yug.io")
+//                .address("Argentina")
+//                .description("all fields")
+//                .build();
 
         logger.info("Test data --> name: `Emma+i` & lastname: `Cold` & phone: `1236583 + i` " +
                 "& email: `ghj@yug.io` & address: `Argentina` & description `all fields`");
@@ -46,7 +47,7 @@ public class AddNewContactsTests extends TestBase {
 
     }
 
-    @Test
+    @Test(groups = {"smoke", "regress", "retest"})
     public void addNewContactSuccess() throws InterruptedException {
         int i = (int) (System.currentTimeMillis() / 1000 % 3600);
         Contacts contacts = Contacts.builder()
@@ -130,16 +131,16 @@ public class AddNewContactsTests extends TestBase {
         logger.info("Assert --> `Add Page is Still Displayed`");
     }
 
-    @Test
-    public void addNewContactWrongPhone() {
-        Contacts contacts = Contacts.builder()
-                .name("Tony")
-                .lastName("Cold")
-                .phone("21154")
-                .email("ghj@yug.io")
-                .address("Argentina")
-                .description("empty phone")
-                .build();
+    @Test(dataProvider = "contactWrongPhone", dataProviderClass = DataProviderContact.class)
+    public void addNewContactWrongPhone(Contacts contacts) {
+//        Contacts contacts = Contacts.builder()
+//                .name("Tony")
+//                .lastName("Cold")
+//                .phone("21154")
+//                .email("ghj@yug.io")
+//                .address("Argentina")
+//                .description("empty phone")
+//                .build();
         logger.info("Test data --> name: `Tony` & lastname: `Cold` & phone: `21154` " +
                 "& email: `ghj@yug.io` & address: `Argentina` & description `empty phone`");
         app.getHelperContact().openContactForm();
