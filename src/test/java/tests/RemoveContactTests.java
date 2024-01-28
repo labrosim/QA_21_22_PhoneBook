@@ -14,6 +14,7 @@ public class RemoveContactTests extends TestBase {
             logger.info("Before method --> User is logged in");
         }
         //if list <3 ===>add 3 contacts
+        //firefox
 
         app.getHelperContact().provideContacts();
         logger.info("Added 3 new contacts");
