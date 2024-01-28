@@ -1,6 +1,5 @@
 package tests;
 
-import jdk.nashorn.internal.runtime.AllocationStrategy;
 import models.User;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
